@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://1ll5vdnbgkif"]
+
+[ext_resource type="Script" uid="uid://c4g5fgcwmdgfk" path="res://character/character_body_controlls.gd" id="1_a8mmw"]
+[ext_resource type="PackedScene" uid="uid://b8y5y5dcyds3y" path="res://character/girl_scene.tscn" id="1_wnabt"]
+[ext_resource type="Script" uid="uid://bmtrmgdg65v1f" path="res://camera/camera_3person.gd" id="2_xwb1e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xwb1e"]
+radius = 0.19238281
+height = 1.8960876
+
+[sub_resource type="BoxMesh" id="BoxMesh_xwb1e"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a8mmw"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wnabt"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wnabt"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_a8mmw"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_okbdu"]
+data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="WorldNode3D" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("visuals", "cam")]
+script = ExtResource("1_a8mmw")
+visuals = NodePath("CharacterVisualsNode3D")
+cam = NodePath("CameraPivotNode3D")
+
+[node name="CharacterVisualsNode3D" parent="CharacterBody3D" instance=ExtResource("1_wnabt")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9405365, 0)
+shape = SubResource("CapsuleShape3D_xwb1e")
+
+[node name="CameraPivotNode3D" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6876361, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivotNode3D"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.20782018, -2.0636277)
+script = ExtResource("2_xwb1e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.65125114, 0.75886226, 0, -0.75886226, 0.65125114, 0, 0, 0)
+
+[node name="TerrainNode3D" type="Node3D" parent="."]
+
+[node name="CubeStaticBody3D" type="StaticBody3D" parent="TerrainNode3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2515178, 0.5, 4.1415577)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TerrainNode3D/CubeStaticBody3D"]
+mesh = SubResource("BoxMesh_xwb1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainNode3D/CubeStaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a8mmw")
+
+[node name="FloorStaticBody3D" type="StaticBody3D" parent="TerrainNode3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TerrainNode3D/FloorStaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_wnabt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainNode3D/FloorStaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_wnabt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TerrainNode3D"]
+transform = Transform3D(13.3, 0, 0, 0, 5.354, 0, 0, 0, 12.406, 3.3625426, 2.4484897, 10.810879)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TerrainNode3D/StaticBody3D"]
+transform = Transform3D(0.54179627, 0, -0.84050995, 0, 1, 0, 0.84050995, 0, 0.54179627, 0, 0, 0)
+mesh = SubResource("PrismMesh_a8mmw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainNode3D/StaticBody3D"]
+transform = Transform3D(0.54179627, 0, -0.84050995, 0, 1, 0, 0.84050995, 0, 0.54179627, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_okbdu")
