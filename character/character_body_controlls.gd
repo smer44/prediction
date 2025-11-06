@@ -8,9 +8,9 @@ class_name CharacterBodyControlls
 @export var move_speed: float = 8.0      # m/s
 @export var turn_speed: float = 7.0     # how quickly we rotate toward input
 @export var align_dot: float = 0.7       # how aligned before we start moving (0..1)
-@export var gravity: float = 39.8      # how aligned before we start moving (0..1)
+@export var gravity: float = 50.      # how aligned before we start moving (0..1)
 @export var max_fall_speed: float = 20.      # how aligned before we start moving (0..1)
-@export var jump_speed: float = 10.      # how aligned before we start moving (0..1)
+@export var jump_speed: float = 20.      # how aligned before we start moving (0..1)
 #@export var damping: float = 20.0        # how fast we stop when no input / unaligned
 var touching := {} # RID -> true
 var is_jump_enabled  = false

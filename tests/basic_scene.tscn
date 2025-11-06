@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://1ll5vdnbgkif"]
 
-[ext_resource type="Script" uid="uid://c4g5fgcwmdgfk" path="res://character/character_body_controlls.gd" id="1_a8mmw"]
-[ext_resource type="PackedScene" uid="uid://b8y5y5dcyds3y" path="res://character/girl_scene.tscn" id="1_wnabt"]
-[ext_resource type="Script" uid="uid://bmtrmgdg65v1f" path="res://camera/camera_3person.gd" id="2_xwb1e"]
+[ext_resource type="Script" uid="uid://c4g5fgcwmdgfk" path="res://character/character_body_controlls.gd" id="1_3ihrk"]
+[ext_resource type="PackedScene" uid="uid://b8y5y5dcyds3y" path="res://character/girl_scene.tscn" id="2_ia3im"]
+[ext_resource type="Script" uid="uid://bmtrmgdg65v1f" path="res://camera/camera_3person.gd" id="3_gxpac"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xwb1e"]
 radius = 0.19238281
@@ -26,11 +26,11 @@ data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, 
 [node name="WorldNode3D" type="Node3D"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("visuals", "cam")]
-script = ExtResource("1_a8mmw")
+script = ExtResource("1_3ihrk")
 visuals = NodePath("CharacterVisualsNode3D")
 cam = NodePath("CameraPivotNode3D")
 
-[node name="CharacterVisualsNode3D" parent="CharacterBody3D" instance=ExtResource("1_wnabt")]
+[node name="CharacterVisualsNode3D" parent="CharacterBody3D" instance=ExtResource("2_ia3im")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9405365, 0)
@@ -41,7 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6876361, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivotNode3D"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.20782018, -2.0636277)
-script = ExtResource("2_xwb1e")
+script = ExtResource("3_gxpac")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.65125114, 0.75886226, 0, -0.75886226, 0.65125114, 0, 0, 0)
@@ -75,5 +75,17 @@ transform = Transform3D(0.54179627, 0, -0.84050995, 0, 1, 0, 0.84050995, 0, 0.54
 mesh = SubResource("PrismMesh_a8mmw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainNode3D/StaticBody3D"]
+transform = Transform3D(0.54179627, 0, -0.84050995, 0, 1, 0, 0.84050995, 0, 0.54179627, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_okbdu")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="TerrainNode3D"]
+transform = Transform3D(0.9666345, 0, 4.905672, 0, 5, 0, -4.905672, 0, 0.9666345, -9.275282, 2.4094694, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TerrainNode3D/StaticBody3D2"]
+transform = Transform3D(0.54179627, 0, -0.84050995, 0, 1, 0, 0.84050995, 0, 0.54179627, 0, 0, 0)
+mesh = SubResource("PrismMesh_a8mmw")
+skeleton = NodePath("../../StaticBody3D2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainNode3D/StaticBody3D2"]
 transform = Transform3D(0.54179627, 0, -0.84050995, 0, 1, 0, 0.84050995, 0, 0.54179627, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_okbdu")
