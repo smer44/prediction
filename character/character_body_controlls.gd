@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		#old_vel_y += old_vel_y
 	velocity.y = old_vel_y	
 		
-	print("is_jump_enabled : " , is_jump_enabled)
+	#print("is_jump_enabled : " , is_jump_enabled)
 	#print("velocity.y : " , velocity.y)
 	move_and_slide()
 	

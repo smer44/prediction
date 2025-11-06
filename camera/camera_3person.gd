@@ -30,7 +30,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		pivot.rotation = Vector3(_pitch, _yaw, 0.0)
 	# Optional: press Esc to release mouse capture
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)		
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
 		
 		
 		
